@@ -1,0 +1,97 @@
+import time
+import random
+
+def mostrar_status(ano, producao, solo, biodiversidade, caixa):
+    print("\n" + "="*40)
+    print(f" SUSTENTABILIDADE AGRO - ANO {ano} ")
+    print("="*40)
+    print(f"🚜 Produção Agrícola: {producao:.1f} toneladas")
+    print(f"🌱 Saúde do Solo: {solo}%")
+    print(f"🐝 Biodiversidade: {biodiversidade}%")
+    print(f"💰 Caixa da Fazenda: R$ {caixa:.2f}")
+    print("-"*40)
+
+def jogo_agro_sustentavel():
+    # Atributos iniciais
+    ano = 1
+    producao = 50.0
+    solo = 80
+    biodiversidade = 75
+    caixa = 50000.0
+    
+    print("Bem-vindo ao Simulador Agro Forte & Futuro Sustentável!")
+    print("Seu objetivo é produzir e lucrar, mantendo a natureza em equilíbrio.")
+    time.sleep(2)
+
+    while ano <= 5:
+        mostrar_status(ano, producao, solo, biodiversidade, caixa)
+        
+        # Fim de jogo por degradação ambiental
+        if solo <= 20 or biodiversidade <= 20:
+            print("\n❌ FIM DE JOGO: O ecossistema colapsou! O solo ficou infértil ou faltaram polinizadores.")
+            break
+        # Fim de jogo por falência
+        if caixa <= 0:
+            print("\n❌ FIM DE JOGO: A fazenda faliu! Planejamento financeiro incorreto.")
+            break
+
+        print("Escolha sua estratégia para a próxima safra:")
+        print("[1] Uso intensivo de defensivos e fertilizantes químicos (Foco em Produção Rápida)")
+        print("[2] Implementar Rotação de Culturas e Plantio Direto (Foco no Solo)")
+        print("[3] Adotar Integração Lavoura-Pecuária-Floresta - ILPF (Equilíbrio Total)")
+        
+        escolha = input("\nDigite o número da sua escolha: ")
+        
+        # Lógicas de impacto de cada escolha
+        if escolha == '1':
+            print("\n📈 Produção subiu, mas a terra sentiu o impacto...")
+            producao += 25
+            solo -= 20
+            biodiversidade -= 20
+            caixa += (producao * 1200) - 15000 # Alto lucro, alto custo de insumos
+            
+        elif escolha == '2':
+            print("\n🌱 O solo agradece! Recuperação de nutrientes em andamento.")
+            producao += 5
+            solo += 15
+            biodiversidade += 5
+            caixa += (producao * 1100) - 8000
+            
+        elif escolha == '3':
+            print("\n🌳 O futuro chegou! Árvores, gado e lavoura em perfeita harmonia.")
+            producao += 15
+            solo += 10
+            biodiversidade += 20
+            caixa += (producao * 1300) - 20000 # Alto investimento, altíssimo retorno sustentável
+            
+        else:
+            print("\n⚠️ Opção inválida. Você perdeu tempo e recursos nesta safra.")
+            caixa -= 5000
+
+        # Limitar atributos ao máximo de 100%
+        solo = min(solo, 100)
+        biodiversidade = min(biodiversidade, 100)
+        
+        # Evento climático aleatório (Variabilidade do mundo real)
+        if random.random() > 0.6:
+            print("\n🌤️ Evento Climático: Uma estiagem afetou a região!")
+            if solo > 60:
+                print("Graças ao solo bem cuidado, as perdas foram mínimas.")
+                caixa -= 3000
+            else:
+                print("Como o solo estava fraco, a perda de produção foi severa.")
+                producao -= 15
+                caixa -= 12000
+
+        ano += 1
+        time.sleep(3)
+
+    if ano > 5:
+        print("\n" + "="*40)
+        print("🎉 PARABÉNS! Você completou os 5 anos de gestão!")
+        print(f"Pontuação Final - Caixa: R$ {caixa:.2f} | Solo: {solo}% | Biodiversidade: {biodiversidade}%")
+        print("Você provou que o Agro Forte e o Meio Ambiente caminham juntos!")
+        print("="*40)
+
+# Executar o jogo
+jogo_agro_sustentavel()
